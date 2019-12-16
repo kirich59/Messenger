@@ -1,0 +1,38 @@
+﻿@using TeamProject.Models
+@model TeamProject.Models.MessageClientModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>MessageClient</title>
+</head>
+<body>
+    <p>@Model.CurrentProfile</p>
+    @foreach (Letter letter in Model.Letters)
+    {
+        <p>@letter.Sender</p>
+        <p>@letter.DateAndTimeOfSending</p>
+        //foreach (Profile profile in letter.Receivers)
+        //{
+        //    @profile 
+        //}
+        <p>@letter.Title</p>
+        <p>@letter.Text</p>
+    }
+    @{ 
+        LetterEditorModel letterEditorModel = new LetterEditorModel
+        {
+            SenderId = Model.CurrentProfile.Id
+        };
+        Html.RenderPartial("_LetterEditor", letterEditorModel);
+    }
+</body>
+</html>
